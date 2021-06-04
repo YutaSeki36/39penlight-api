@@ -1,12 +1,14 @@
 package main
 
 import (
+	"github.com/39penlight-api/mqtt"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"os"
 )
 
 func main() {
+	mqtt.NewMQTTClient()
 	r:= gin.Default()
 	r.GET("/", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
