@@ -8,8 +8,10 @@ import (
 )
 
 func main() {
-	mqtt.NewMQTTClient()
-	r:= gin.Default()
+	cl := mqtt.NewMQTTClient()
+	//cl.Publish("start")
+	defer cl.Disconnect()
+	r := gin.Default()
 	r.GET("/", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
 			"message": "hello world",

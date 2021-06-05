@@ -46,6 +46,7 @@ func (m *MQTTClient) Publish(massage string) bool {
 func (m *MQTTClient) Disconnect() error {
 	if m.client.IsConnected() {
 		m.client.Disconnect(250)
+		fmt.Println("client disconnected")
 		return nil
 	}
 	return errors.New("client has no connection")
