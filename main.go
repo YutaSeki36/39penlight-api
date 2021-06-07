@@ -3,19 +3,18 @@ package main
 import (
 	"github.com/39penlight-api/mqtt"
 	"github.com/gin-gonic/gin"
-	"net/http"
 	"os"
 )
 
 func main() {
 	cl := mqtt.NewMQTTClient()
-	//cl.Publish("start")
 	defer cl.Disconnect()
+	controller := NewColorController(cl)
+
 	r := gin.Default()
-	r.GET("/", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
-			"message": "hello world",
-		})
+
+	r.POST("color", func(context *gin.Context) {
+		controller.ChangePenlightColor(context)
 	})
 
 	port := os.Getenv("PORT")

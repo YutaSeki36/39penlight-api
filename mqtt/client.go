@@ -12,6 +12,11 @@ const (
 	resource    = "color"
 )
 
+type ClientInterface interface {
+	Publish(string) bool
+	Disconnect() error
+}
+
 type MQTTClient struct {
 	client MQTT.Client
 }
