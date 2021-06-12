@@ -5,7 +5,6 @@ import (
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"os"
-	"time"
 )
 
 func main() {
@@ -14,25 +13,7 @@ func main() {
 	controller := NewColorController(cl)
 
 	r := gin.Default()
-	r.Use(cors.New(cors.Config{
-		AllowOrigins: []string{
-			"https://zen-fermat-8df333.netlify.app",
-			"http://localhost:3000",
-		},
-		AllowMethods: []string{
-			"POST",
-		},
-		AllowHeaders: []string{
-			"Access-Control-Allow-Credentials",
-			"Access-Control-Allow-Headers",
-			"Content-Type",
-			"Content-Length",
-			"Accept-Encoding",
-			"Authorization",
-		},
-		AllowCredentials: true,
-		MaxAge:           24 * time.Hour,
-	}))
+	r.Use(cors.Default())
 
 	r.POST("color", func(context *gin.Context) {
 		controller.ChangePenlightColor(context)
